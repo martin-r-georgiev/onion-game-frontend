@@ -1,0 +1,70 @@
+@font-face {
+	font-family: OldLondon;
+	src: url('./assets/fonts/OldLondon.ttf') format('truetype'),
+		url('./assets/fonts/OldLondon.woff') format('woff'),
+		url('./assets/fonts/OldLondon.woff2') format('woff2');
+}
+
+body {
+	background-color: #0e292e;
+	color: #ffffff;
+}
+
+.start-window {
+	
+	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('./assets/images/background.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	
+	min-height: 100vh;
+	height: 100%;
+	width: 100%;
+
+	text-align: center;
+
+	transition: visibility 2s;
+}
+
+.start-header {
+	margin-top: 10em;
+}
+
+.start-header h1 {
+	font-family: OldLondon;
+	font-size: 120px;
+}
+
+.start-header p {
+	font-size: 20px; 
+	color: #cccccc;
+}
+
+.play-button {
+	padding: 10px 100px 10px 100px;
+}
+
+.game-body {
+	margin-top: 5em;
+	text-align: center;
+}
+
+/* Animations */
+
+.fade-enter {
+	opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+	opacity: 1;
+	transition: opacity 0.5s ease-in;
+}
+
+.fade-exit {
+	opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+	opacity: 0.01;
+	transition: opacity 0.5s ease-in;
+}
