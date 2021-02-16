@@ -11,26 +11,33 @@ const App = () => {
 	const [showStartScreen, setShowStartScreen] = useState(true);
 	const [mounted, setMounted] = useState(false);
 
+	const [username, setUsername] = useState(null);
+
 	const startGameEvent = () => {
 		setShowStartScreen(false);
 		setMounted(false);
 		console.log("Started game!");
 	}
 
+	const resetGameEvent = () => {
+		setShowStartScreen(true);
+		setMounted(false);
+		console.log("Game reset!");
+	}
+
 	useEffect(() => {
 		setMounted(true);
-		console.log("Spam?");
 	}, [mounted])
 
 	return (
 		<>
 		{ showStartScreen ?
 			<CSSTransition in={mounted} classNames="fade" timeout={500} unmountOnExit>
-				<StartScreen onClickEvent={startGameEvent}/>
+				<StartScreen onClickEvent={startGameEvent} setUsername={setUsername}/>
 			</CSSTransition>
 			:
 			<CSSTransition in={mounted} classNames="fade" timeout={500} unmountOnExit>
-				<GameBody/>
+				<GameBody username={username} onClickEvent={resetGameEvent}/>
 			</CSSTransition>
 		}
 		</>

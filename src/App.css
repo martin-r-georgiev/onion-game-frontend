@@ -10,6 +10,17 @@ body {
 	color: #ffffff;
 }
 
+.nav-bar {
+	background: #fafafa;
+
+	transition: color 1s ease-in-out;
+	transition: background-color 1s ease-in-out;
+}
+
+.pill-button {
+	border-radius: 40px;
+}
+
 .start-window {
 	
 	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('./assets/images/background.jpg');
@@ -40,14 +51,139 @@ body {
 	color: #cccccc;
 }
 
+#username-form-input {
+	margin: 20px;
+	width: 400px;
+	border-radius: 40px;
+	background-color: rgba(0, 0, 0, 0.8);
+	color: #ffffff;
+}
+
 .play-button {
 	padding: 10px 100px 10px 100px;
+	border-radius: 40px;
 }
 
 .game-body {
-	margin-top: 5em;
 	text-align: center;
+	min-height: 100vh;
+	height: 100%;
+	width: 100%;
+	
+	background-color: #eeeeee;
+	color: #000000;
+
+	transition: color 1s ease-in-out;
+	transition: background-color 1s ease-in-out;
 }
+
+.dark-theme {
+	background-color: #0f0f0f !important;
+	color: #ffffff !important;
+}
+
+.dark-theme button {
+	color: #ffffff !important;
+}
+
+.game-correct {
+	min-height: 100vh;
+	height: 100%;
+	width: 100%;
+	animation: correct 3s linear;
+}
+
+.game-incorrect {
+	min-height: 100vh;
+	height: 100%;
+	width: 100%;
+	animation: incorrect 3s linear;
+}
+
+@keyframes correct {
+	0% {
+		background-color: transparent;
+	}
+
+	20% {
+		background-color: #28a745;
+	}
+
+	80% {
+		background-color: #28a745;
+	}
+
+	100% {
+		background-color: transparent;
+	}
+}
+
+@keyframes incorrect {
+	0% {
+		background-color: transparent;
+	}
+
+	20% {
+		background-color: #dc3545;
+	}
+
+	80% {
+		background-color: #dc3545;
+	}
+
+	100% {
+		background-color: transparent;
+	}
+}
+
+.game-body-buttons {
+	margin-top: 5em;
+}
+
+.game-body h1 {
+	margin-top: 5em;
+}
+
+.score-bar {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: inherit;
+}
+
+/* User data */
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+  }
+
+.dropdown-btn {
+	border: none;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+	padding-top: 10px;
+	display: none;
+	position: absolute;
+	right: 0px;
+	background-color: #f1f1f1;
+	min-width: 250px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+	z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content p {
+	display: block;
+	padding: 0 5px 0 5px;
+	text-align: left;
+	text-decoration: none;
+  }
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
 
 /* Animations */
 
