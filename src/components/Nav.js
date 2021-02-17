@@ -1,6 +1,6 @@
 import '../App.css';
 
-const Nav = ({username, onClickEvent, classNames, correct, total}) => {
+const Nav = ({username, onClickEvent, classNames, dropdownClassNames, correct, total}) => {
 
     let accuracy = Math.round(((correct / total) + Number.EPSILON) * 10000) / 100;
 
@@ -13,7 +13,7 @@ const Nav = ({username, onClickEvent, classNames, correct, total}) => {
             <div className="col d-flex justify-content-end">
             <div className="dropdown">
                 <h4 className="dropdown-btn">{username}</h4>
-                    <div className="dropdown-content">
+                    <div className={dropdownClassNames}>
                         <p><b>Correct Guesses:</b> {correct}</p>
                         <p><b>Total Guesses:</b> {total}</p>
                         <p><b>Accuracy:</b> {accuracy}%</p>

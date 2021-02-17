@@ -18,7 +18,8 @@ const GameBody = ({username, onClickEvent}) => {
 
     const [themeCounter, setThemeCounter] = useState(0);
 
-    const [article, setArticle] = useState({});
+    //const [article, setArticle] = useState({});
+    let article = useRef({});
 
     const [title, setTitle] = useState("");
     const [score, setScore] = useState(0);
@@ -41,7 +42,8 @@ const GameBody = ({username, onClickEvent}) => {
         } )
         .then((data) => {
             //console.log("Retreiving article");
-            setArticle(data);
+            //setArticle(data);
+            article.current = data;
             setTitle(data.details);
         }).catch(err => {
             console.error('Caught error: ', err);
@@ -66,9 +68,9 @@ const GameBody = ({username, onClickEvent}) => {
     } 
 
     const makeGuess = (isTheOnion) => {
-        console.log(article);
-        if (Object.keys(article).length !== 0 && article.isTheOnion !== 'undefined') {
-            if(article.isTheOnion === isTheOnion) {
+        //console.log(article.current);
+        if (Object.keys(article.current).length !== 0 && article.current.isTheOnion !== 'undefined') {
+            if(article.current.isTheOnion === isTheOnion) {
                 correctAnimationTrigger();
                 setCorrectGuesses (prev => prev + 1);
                 setScore (prev => prev + 1);
@@ -86,13 +88,32 @@ const GameBody = ({username, onClickEvent}) => {
         }
     }
 
-    useEffect(() => {
-        getNewsArticle();
+    const handleKeyPresses = (event) => {
+        if(real_button_ref.current && onion_button_ref.current) {
+            if(!real_button_ref.current.hasAttribute("disabled") || !onion_button_ref.current.hasAttribute("disabled")) {
+                if(event.keyCode === 37) {
+                    onGuessClickEvent(false);
+                } else if (event.keyCode === 39) {
+                    onGuessClickEvent(true);
+                }
+            }
+        }
+    }
+
+    useEffect(async () => {
+        await getNewsArticle();
+        window.addEventListener('keydown', handleKeyPresses);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyPresses);
+        };
     }, []);
 
     const onGuessClickEvent = (isTheOnion) => {
-        real_button_ref.current.setAttribute("disabled", "disabled");
-        onion_button_ref.current.setAttribute("disabled", "disabled");
+        if(real_button_ref.current && onion_button_ref.current) {
+            real_button_ref.current.setAttribute("disabled", "disabled");
+            onion_button_ref.current.setAttribute("disabled", "disabled");
+        }
         makeGuess(isTheOnion);
     }
 
@@ -104,11 +125,13 @@ const GameBody = ({username, onClickEvent}) => {
         setClassNames("game-incorrect");
     }
 
-    const onAnimationEnd = () => {
-        getNewsArticle();
+    const onAnimationEnd = async () => {
+        await getNewsArticle();
 
-        real_button_ref.current.removeAttribute("disabled");
-        onion_button_ref.current.removeAttribute("disabled");
+        if(real_button_ref.current && onion_button_ref.current) {
+            real_button_ref.current.removeAttribute("disabled");
+            onion_button_ref.current.removeAttribute("disabled");
+        }
 
         setThemeCounter(themeCounter + 1);
         setClassNames("");
@@ -123,9 +146,9 @@ const GameBody = ({username, onClickEvent}) => {
     }
  
     return (
-    <div className={gameBodyClasses}>
+    <div className={gameBodyClasses} onKeyDown={(e) => {handleKeyPresses(e)}}>
         <div className={classNames} onAnimationEnd={onAnimationEnd}>
-            <Nav username={username} onClickEvent={onClickEvent} classNames={navClassNames} correct={correctGuesses} total={guesses}/>
+            <Nav username={username} onClickEvent={onClickEvent} classNames={navClassNames} dropdownClassNames={navDropdownClassNames} correct={correctGuesses} total={guesses}/>
             <div className="container">
                 <div className="row d-flex align-items-start">
                     <div className="col">
