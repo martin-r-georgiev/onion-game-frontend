@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import '../App.css';
 
+import Footer from './Footer';
+
 const StartScreen = ({onClickEvent, setUsername}) => {
 
     const [name, setName] = useState("");
@@ -33,6 +35,7 @@ const StartScreen = ({onClickEvent, setUsername}) => {
                 </div>
             </div>
         </div>
+        <Footer/>
     </div>
     );
 }
