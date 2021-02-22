@@ -81,10 +81,6 @@ const GameBody = ({username, onClickEvent}) => {
                 sendUserGuess(false);
             }
             setGuesses (prev => prev + 1);
-
-            if(score > highscore) {
-                setHighscore(score);
-            }
         }
     }
 
@@ -99,6 +95,12 @@ const GameBody = ({username, onClickEvent}) => {
             }
         }
     }
+
+    useEffect(() => {
+        if(score > highscore) {
+            setHighscore(score);
+        }
+    }, [score])
 
     useEffect(async () => {
         await getNewsArticle();
