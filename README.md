@@ -12,3 +12,6 @@ The background changes once every 10 articles, this is to gather information for
 
 Once you have cloned the repository, run `npm install` and then `npm start`
 
+### Backend
+
+Backend can be found on https://github.com/Maimunar/onion-game-backend
